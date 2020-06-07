@@ -18,6 +18,7 @@ class UserController extends Controller
             $user->lastName = $request->lastName;
             $user->phone = $request->phone;
             $user->dni = $request->dni;
+            $user->birthdate = $request->birthdate;
             $user->idGender = $request->idGender;
             $user->idType = $request->idType;
             $user->save();
