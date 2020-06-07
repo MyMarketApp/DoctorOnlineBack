@@ -17,3 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::prefix('User')->group(function(){
+    Route::post('add', 'Api\UserController@add');
+    Route::get('types', 'Api\UserTypeController@all');
+    Route::get('genders', 'Api\UserGenderController@all');
+    Route::post('update', 'Api\UserController@update');
+    Route::post('login', 'Api\UserController@login');
+    Route::get('{email}/verify', 'Api\UserController@verify');
+});
