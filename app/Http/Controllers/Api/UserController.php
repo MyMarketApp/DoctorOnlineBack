@@ -16,7 +16,9 @@ class UserController extends Controller
             $user->email = $request->email;
             $user->password = $request->password;
             $user->lastName = $request->lastName;
-            $user->gender = $request->gender;
+            $user->phone = $request->phone;
+            $user->dni = $request->dni;
+            $user->idGender = $request->idGender;
             $user->idType = $request->idType;
             $user->save();
             
@@ -101,7 +103,7 @@ class UserController extends Controller
             $user->lastName = $request->lastName;
             $user->gender = $request->gender;
             $user->idType = $request->idType;
-            
+
             return response()->json(['status' => true, 
                 'message'=> 'Update Success',
                 'body'=> $user],
