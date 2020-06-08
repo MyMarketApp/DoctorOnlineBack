@@ -26,3 +26,7 @@ Route::prefix('User')->group(function(){
     Route::post('login', 'Api\UserController@login');
     Route::get('{email}/verify', 'Api\UserController@verify');
 });
+
+Route::prefix('Specialty')->group(function(){
+    Route::get('all', 'Api\SpecialtyController@all');
+});
