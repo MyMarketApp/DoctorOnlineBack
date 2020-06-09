@@ -11,7 +11,7 @@ class User extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'name', 'email','lastName','birthdate','idGender','idType', 'phone', 'dni'
+        'email', 'phone', 'score', 'idType'
     ];
     protected $hidden = [
         'password',
@@ -20,10 +20,5 @@ class User extends Model
     public function type()
     {
         return $this->belongsTo('App\Http\Models\UserType','idType','id');
-    }
-
-    public function gender()
-    {
-        return $this->belongsTo('App\Http\Models\UserGender','idGender','id');
     }
 }

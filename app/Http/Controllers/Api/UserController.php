@@ -12,14 +12,10 @@ class UserController extends Controller
         try
         {
             $user = new User();
-            $user->name = $request->name;
             $user->email = $request->email;
             $user->password = $request->password;
-            $user->lastName = $request->lastName;
             $user->phone = $request->phone;
-            $user->dni = $request->dni;
-            $user->birthdate = $request->birthdate;
-            $user->idGender = $request->idGender;
+            $user->score = $request->score;
             $user->idType = $request->idType;
             $user->save();
             
