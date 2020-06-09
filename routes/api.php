@@ -27,6 +27,11 @@ Route::prefix('User')->group(function(){
     Route::get('{email}/verify', 'Api\UserController@verify');
 });
 
+Route::prefix('Patient')->group(function(){
+    Route::post('add', 'Api\PatientController@add');
+    Route::post('update', 'Api\PatientController@update');
+});
+
 Route::prefix('Specialty')->group(function(){
     Route::get('all', 'Api\SpecialtyController@all');
 });

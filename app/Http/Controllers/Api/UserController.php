@@ -38,7 +38,7 @@ class UserController extends Controller
         {
             $user = User::where('email',$request->email)
                         ->where('password',$request->password)
-                        ->with(['type','gender'])->first();
+                        ->with(['type'])->first();
             if($user)
             {
                 return response()->json(['status' => true, 
@@ -66,7 +66,7 @@ class UserController extends Controller
     public function verify($email){
         try
         {
-            $user = User::where('email',$email)->with(['type','gender'])->first();
+            $user = User::where('email',$email)->with(['type'])->first();
             if($user)
             {
                 return response()->json(['status' => true, 
@@ -95,11 +95,12 @@ class UserController extends Controller
         try
         {
             $user = User::where('email',$request->email)->first();
-            $user->name = $request->name;
+            $user->email = $request->email;
             $user->password = $request->password;
-            $user->lastName = $request->lastName;
-            $user->gender = $request->gender;
+            $user->phone = $request->phone;
+            $user->score = $request->score;
             $user->idType = $request->idType;
+            $user->save();
 
             return response()->json(['status' => true, 
                 'message'=> 'Update Success',

@@ -18,7 +18,7 @@ class CreateUserTable extends Migration
             $table->string('email')->unique();
             $table->string('password')->nullable();
             $table->string('phone')->nullable();
-            $table->string('score')->nullable();
+            $table->float('score')->nullable();
             $table->integer('idType')->unsigned()->nullable();
             $table->timestamps();
 
