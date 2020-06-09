@@ -66,7 +66,7 @@ class UserController extends Controller
     public function verify($email){
         try
         {
-            $user = User::where('email',$email)->with(['type'])->first();
+            $user = User::where('email',$email)->with(['type','profiles.gender'])->first();
             if($user)
             {
                 return response()->json(['status' => true, 
