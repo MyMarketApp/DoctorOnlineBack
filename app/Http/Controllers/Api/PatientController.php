@@ -38,7 +38,7 @@ class PatientController extends Controller
     public function update(Request $request){
         try
         {
-            $patient = User::where('id',$request->id)->first();
+            $patient = Patient::where('id',$request->id)->first();
             $patient->name = $request->name;
             $patient->lastName = $request->lastName;
             $patient->idGender = $request->idGender;
@@ -54,6 +54,25 @@ class PatientController extends Controller
                 200);
 
             
+        }
+        catch(\Exception $e)
+        {
+            return response()->json(['status' => false,
+                'message'=> 'Hubo un error',
+                'body' => $e->getMessage()],
+                500);
+        }
+    }
+
+    public function all(){
+        try
+        {
+            $patients = Patient::all();
+            
+            return response()->json(['status' => true, 
+                'message'=> 'Patients Found',
+                'body'=> $patients],
+                200);
         }
         catch(\Exception $e)
         {

@@ -21,6 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::prefix('User')->group(function(){
     Route::post('add', 'Api\UserController@add');
     Route::get('types', 'Api\UserTypeController@all');
+    Route::get('find/{id}', 'Api\UserController@find');
     Route::get('genders', 'Api\UserGenderController@all');
     Route::post('update', 'Api\UserController@update');
     Route::post('login', 'Api\UserController@login');
@@ -30,6 +31,7 @@ Route::prefix('User')->group(function(){
 Route::prefix('Patient')->group(function(){
     Route::post('add', 'Api\PatientController@add');
     Route::post('update', 'Api\PatientController@update');
+    Route::get('all', 'Api\PatientController@all');
 });
 
 Route::prefix('Specialty')->group(function(){

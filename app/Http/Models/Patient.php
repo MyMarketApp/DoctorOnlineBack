@@ -14,8 +14,9 @@ class Patient extends Model
         'name', 'lastName', 'idGender', 'idUser', 'dni', 'birthdate', 'imageUrl'
     ];
 
-    public function type()
+    public function gender()
     {
-        return $this->belongsTo('App\Http\Models\User','idUser','id');
+        return $this->belongsTo('App\Http\Models\UserGender','idGender','id');
     }
+
 }

@@ -21,4 +21,9 @@ class User extends Model
     {
         return $this->belongsTo('App\Http\Models\UserType','idType','id');
     }
+
+    public function profiles()
+    {
+        return $this->hasMany('App\Http\Models\Patient','idUser','id');
+    }
 }

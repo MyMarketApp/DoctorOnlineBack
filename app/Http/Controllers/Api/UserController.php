@@ -117,4 +117,23 @@ class UserController extends Controller
                 500);
         }
     }
+
+    public function find($id){
+        try
+        {
+            $user = User::where('id',$id)->with(['type','profiles.gender'])->first();
+            
+            return response()->json(['status' => true, 
+                'message'=> 'User Found',
+                'body'=> $user],
+                200);
+        }
+        catch(\Exception $e)
+        {
+            return response()->json(['status' => false,
+                'message'=> 'Hubo un error',
+                'body' => $e->getMessage()],
+                500);
+        }
+    }
 }
