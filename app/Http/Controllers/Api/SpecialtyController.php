@@ -27,4 +27,23 @@ class SpecialtyController extends Controller
         }
     }
 
+    public function doctors($id){
+        try
+        {
+            $specialty = Specialty::where('id',$id)->with(['doctors'])->first();
+            
+            return response()->json(['status' => true, 
+                'message'=> 'Doctors Found',
+                'body'=> $specialty->doctors],
+                200);
+        }
+        catch(\Exception $e)
+        {
+            return response()->json(['status' => false,
+                'message'=> 'Hubo un error',
+                'body' => $e->getMessage()],
+                500);
+        }
+    }
+
 }

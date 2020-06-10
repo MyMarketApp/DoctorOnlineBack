@@ -42,4 +42,5 @@ Route::prefix('Doctor')->group(function(){
 
 Route::prefix('Specialty')->group(function(){
     Route::get('all', 'Api\SpecialtyController@all');
+    Route::get('{id}/doctors', 'Api\SpecialtyController@doctors');
 });

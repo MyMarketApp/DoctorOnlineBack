@@ -14,4 +14,8 @@ class Specialty extends Model
         'name', 'imageUrl'
     ];
 
+    public function doctors()
+    {
+        return $this->hasMany('App\Http\Models\Doctor','idSpecialty','id');
+    }
 }
