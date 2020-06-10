@@ -22,7 +22,6 @@ class CreateDoctorTable extends Migration
             $table->float('rate');
             $table->integer('idGender')->unsigned();
             $table->integer('idUser')->unsigned();
-            $table->integer('idSchedule')->unsigned()->nullable();
             $table->integer('idSpecialty')->unsigned();
             $table->date('birthdate')->nullable();
             $table->string('imageUrl')->nullable();
@@ -31,7 +30,6 @@ class CreateDoctorTable extends Migration
             $table->foreign('idUser')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('idGender')->references('id')->on('user_gender')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('idSpecialty')->references('id')->on('specialties')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('idSchedule')->references('id')->on('schedule')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

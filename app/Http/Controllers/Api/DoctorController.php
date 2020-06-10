@@ -19,7 +19,6 @@ class DoctorController extends Controller
             $doctor->rate = $request->rate;
             $doctor->idGender = $request->idGender;
             $doctor->idUser = $request->idUser;
-            $doctor->idSchedule = $request->idSchedule;
             $doctor->idSpecialty = $request->idSpecialty;
             $doctor->birthdate = $request->birthdate;
             $doctor->imageUrl = $request->imageUrl;
@@ -50,7 +49,6 @@ class DoctorController extends Controller
             $doctor->rate = $request->rate;
             $doctor->idGender = $request->idGender;
             $doctor->idUser = $request->idUser;
-            $doctor->idSchedule = $request->idSchedule;
             $doctor->idSpecialty = $request->idSpecialty;
             $doctor->birthdate = $request->birthdate;
             $doctor->imageUrl = $request->imageUrl;
