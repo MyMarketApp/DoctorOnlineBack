@@ -88,4 +88,23 @@ class DoctorController extends Controller
                 500);
         }
     }
+
+    public function schedules($id){
+        try
+        {
+            $doctor = Doctor::where('id',$id)->with(['schedules'])->first();
+
+            return response()->json(['status' => true, 
+                'message'=> 'Schedules Found',
+                'body'=> $doctor->schedules],
+                200);
+        }
+        catch(\Exception $e)
+        {
+            return response()->json(['status' => false,
+                'message'=> 'Hubo un error',
+                'body' => $e->getMessage()],
+                500);
+        }
+    }
 }
