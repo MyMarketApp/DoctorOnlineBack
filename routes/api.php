@@ -34,6 +34,12 @@ Route::prefix('Patient')->group(function(){
     Route::get('all', 'Api\PatientController@all');
 });
 
+Route::prefix('Doctor')->group(function(){
+    Route::post('add', 'Api\DoctorController@add');
+    Route::post('update', 'Api\DoctorController@update');
+    Route::get('all', 'Api\DoctorController@all');
+});
+
 Route::prefix('Specialty')->group(function(){
     Route::get('all', 'Api\SpecialtyController@all');
 });
