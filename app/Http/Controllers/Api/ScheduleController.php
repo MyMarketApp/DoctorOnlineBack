@@ -14,7 +14,7 @@ class ScheduleController extends Controller
             $schedule = new Schedule();
             $schedule->day = $request->day;
             $schedule->start = $request->start;
-            $schedule->end = $end->end;
+            $schedule->end = $request->end;
             $schedule->save();
             
             return response()->json(['status' => true, 
