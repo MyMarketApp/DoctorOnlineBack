@@ -22,7 +22,7 @@ class CreateDoctorTable extends Migration
             $table->float('rate');
             $table->integer('idGender')->unsigned();
             $table->integer('idUser')->unsigned();
-            $table->integer('idSchedule')->unsigned();
+            $table->integer('idSchedule')->unsigned()->nullable();
             $table->integer('idSpecialty')->unsigned();
             $table->date('birthdate')->nullable();
             $table->string('imageUrl')->nullable();
