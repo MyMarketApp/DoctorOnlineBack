@@ -5,12 +5,25 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Doctor;
+use Cartalyst\Stripe\Stripe;
 
 class DoctorController extends Controller
 {
     public function add(Request $request){
         try
         {
+            $stripe = new \Stripe\StripeClient(env('STRIPE_API_KEY'));
+            $product = $stripe->products->create([
+                'name'        => $request->name + " " + $request->lastName,
+                'description' => 'Consulta',
+              ]);
+
+            $price = $stripe->prices->create([
+                'product' => $product->id,
+                'unit_amount' => $request->rate*100,
+                'currency' => 'pen',
+              ]);
+
             $doctor = new Doctor();
             $doctor->description = $request->description;
             $doctor->name = $request->name;
@@ -22,6 +35,7 @@ class DoctorController extends Controller
             $doctor->idSpecialty = $request->idSpecialty;
             $doctor->birthdate = $request->birthdate;
             $doctor->imageUrl = $request->imageUrl;
+            $doctor->idStripePrice = $price->id;
             $doctor->save();
             
             return response()->json(['status' => true, 
@@ -107,5 +121,26 @@ class DoctorController extends Controller
                 500);
         }
     }
+
+    // public function try(){
+    //     try
+    //     {
+    //         $stripe = new \Stripe\StripeClient(env('STRIPE_API_KEY'));
+    //         $price = $stripe->prices->retrieve('price_1Gt4WWCIA0h2xnEvkJFONiWM', []);
+    //         return $price;
+            
+    //         $stripe = new Stripe(env('STRIPE_API_KEY'));
+    //         $product = $stripe->products()->find('prod_HRaYkuUV0CEhho');
+    //         return $product;
+
+    //     }
+    //     catch(\Exception $e)
+    //     {
+    //         return response()->json(['status' => false,
+    //             'message'=> 'Hubo un error',
+    //             'body' => $e->getMessage()],
+    //             500);
+    //     }
+    // }
 
 }

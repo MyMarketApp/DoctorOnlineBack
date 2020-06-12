@@ -20,6 +20,7 @@ class CreateUserTable extends Migration
             $table->string('phone')->nullable();
             $table->float('score')->nullable();
             $table->integer('idType')->unsigned()->nullable();
+            $table->string('idStripeCustomer')->nullable();
             $table->timestamps();
 
             $table->foreign('idType')->references('id')->on('user_type')->onUpdate('cascade')->onDelete('cascade');

@@ -11,12 +11,21 @@ class UserController extends Controller
     public function add(Request $request){
         try
         {
+            
             $user = new User();
             $user->email = $request->email;
             $user->password = $request->password;
             $user->phone = $request->phone;
             $user->score = $request->score;
             $user->idType = $request->idType;
+            if ($request->idType == 1)
+            {
+                $stripe = new \Stripe\StripeClient(env('STRIPE_API_KEY'));
+                $customer = $stripe->customers()->create([
+                    'email' => $request->email,
+                ]);
+                $user->idStripeCustomer = $customer->id;
+            }
             $user->save();
             
             return response()->json(['status' => true, 

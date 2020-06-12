@@ -25,6 +25,7 @@ class CreateDoctorTable extends Migration
             $table->integer('idSpecialty')->unsigned();
             $table->date('birthdate')->nullable();
             $table->string('imageUrl')->nullable();
+            $table->string('idStripePrice');
             $table->timestamps();
 
             $table->foreign('idUser')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
