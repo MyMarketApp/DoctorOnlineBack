@@ -5,13 +5,13 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Models\User;
+use Cartalyst\Stripe\Stripe;
 
 class UserController extends Controller
 {
     public function add(Request $request){
         try
         {
-            
             $user = new User();
             $user->email = $request->email;
             $user->password = $request->password;
@@ -21,7 +21,7 @@ class UserController extends Controller
             if ($request->idType == 1)
             {
                 $stripe = new \Stripe\StripeClient(env('STRIPE_API_KEY'));
-                $customer = $stripe->customers()->create([
+                $customer = $stripe->customers->create([
                     'email' => $request->email,
                 ]);
                 $user->idStripeCustomer = $customer->id;
