@@ -12,9 +12,11 @@ class DoctorController extends Controller
     public function add(Request $request){
         try
         {
+
             $stripe = new \Stripe\StripeClient(env('STRIPE_API_KEY'));
+            
             $product = $stripe->products->create([
-                'name'        => $request->name + " " + $request->lastName,
+                'name'        => $request->name . " " . $request->lastName,
                 'description' => 'Consulta',
               ]);
 
