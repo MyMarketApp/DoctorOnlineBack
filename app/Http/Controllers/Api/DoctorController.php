@@ -105,6 +105,25 @@ class DoctorController extends Controller
         }
     }
 
+    public function top(){
+        try
+        {
+            $doctors = Doctor::with(['specialty'])->take(3)->get();
+            
+            return response()->json(['status' => true, 
+                'message'=> 'Doctors Found',
+                'body'=> $doctors],
+                200);
+        }
+        catch(\Exception $e)
+        {
+            return response()->json(['status' => false,
+                'message'=> 'Hubo un error',
+                'body' => $e->getMessage()],
+                500);
+        }
+    }
+
     public function schedules($id){
         try
         {
