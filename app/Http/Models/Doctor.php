@@ -20,6 +20,11 @@ class Doctor extends Model
         return $this->belongsTo('App\Http\Models\UserGender','idGender','id');
     }
 
+    public function specialty()
+    {
+        return $this->belongsTo('App\Http\Models\Specialty','idSpecialty','id');
+    }
+
     public function schedules()
     {
         return $this->belongsToMany('App\Http\Models\Schedule', 'doctor_schedule', 'idDoctor', 'idSchedule');

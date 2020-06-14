@@ -71,7 +71,7 @@ class AppointmentController extends Controller
     public function all(){
         try
         {
-            $appointments = Appointment::with(['doctor','status','patient','schedule'])->get();
+            $appointments = Appointment::with(['doctor.specialty','status','patient','schedule'])->get();
 
             return response()->json(['status' => true, 
                 'message'=> 'Appointments Found',
