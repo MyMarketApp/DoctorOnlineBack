@@ -15,4 +15,24 @@ class Appointment extends Model
         'idDoctor', 'idStatus', 'idPatient', 'idSchedule'
     ];
 
+    public function doctor()
+    {
+        return $this->belongsTo('App\Http\Models\Doctor','idDoctor','id');
+    }
+
+    public function status()
+    {
+        return $this->belongsTo('App\Http\Models\AppointmentStatus','idStatus','id');
+    }
+
+    public function patient()
+    {
+        return $this->belongsTo('App\Http\Models\Patient','idPatient','id');
+    }
+
+    public function schedule()
+    {
+        return $this->belongsTo('App\Http\Models\Schedule','idSchedule','id');
+    }
+
 }

@@ -55,4 +55,5 @@ Route::prefix('Schedule')->group(function(){
 Route::prefix('Appointment')->group(function(){
     Route::post('update', 'Api\AppointmentController@update');
     Route::post('add', 'Api\AppointmentController@add');
+    Route::get('all', 'Api\AppointmentController@all');
 });

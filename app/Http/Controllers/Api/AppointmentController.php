@@ -68,4 +68,25 @@ class AppointmentController extends Controller
         }
     }
 
+    public function all(){
+        try
+        {
+            $appointments = Appointment::with(['doctor','status','patient','schedule'])->get();
+
+            return response()->json(['status' => true, 
+                'message'=> 'Appointments Found',
+                'body'=> $appointments],
+                200);
+
+            
+        }
+        catch(\Exception $e)
+        {
+            return response()->json(['status' => false,
+                'message'=> 'Hubo un error',
+                'body' => $e->getMessage()],
+                500);
+        }
+    }
+
 }
