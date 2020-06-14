@@ -23,7 +23,7 @@ class AppointmentController extends Controller
             $appointment->idSchedule = $request->idSchedule;
             $appointment->save();
 
-            $appointment = Appointment::where('id',$request->id)->with(['doctor.specialty','status','patient','schedule'])->first();
+            $appointment = Appointment::where('id',$appointment->id)->with(['doctor.specialty','status','patient','schedule'])->first();
             
             return response()->json(['status' => true, 
                 'message'=> 'Appointment Created',
