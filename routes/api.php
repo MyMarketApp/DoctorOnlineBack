@@ -26,6 +26,7 @@ Route::prefix('User')->group(function(){
     Route::post('update', 'Api\UserController@update');
     Route::post('login', 'Api\UserController@login');
     Route::get('{email}/verify', 'Api\UserController@verify');
+    Route::get('{id}/profiles', 'Api\UserController@profiles');
 });
 
 Route::prefix('Patient')->group(function(){

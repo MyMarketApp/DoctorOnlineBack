@@ -75,7 +75,7 @@ class UserController extends Controller
     public function verify($email){
         try
         {
-            $user = User::where('email',$email)->with(['type','profiles.gender'])->first();
+            $user = User::where('email',$email)->with(['type'])->first();
             if($user)
             {
                 return response()->json(['status' => true, 
@@ -130,11 +130,30 @@ class UserController extends Controller
     public function find($id){
         try
         {
-            $user = User::where('id',$id)->with(['type','profiles.gender'])->first();
+            $user = User::where('id',$id)->with(['type'])->first();
             
             return response()->json(['status' => true, 
                 'message'=> 'User Found',
                 'body'=> $user],
+                200);
+        }
+        catch(\Exception $e)
+        {
+            return response()->json(['status' => false,
+                'message'=> 'Hubo un error',
+                'body' => $e->getMessage()],
+                500);
+        }
+    }
+
+    public function profiles($id){
+        try
+        {
+            $user = User::where('id',$id)->with(['profiles.gender'])->first();
+            
+            return response()->json(['status' => true, 
+                'message'=> 'Profiles Found',
+                'body'=> $user->profiles],
                 200);
         }
         catch(\Exception $e)
