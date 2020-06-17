@@ -20,7 +20,7 @@ class CreateDoctorTable extends Migration
             $table->string('lastName')->nullable();
             $table->string('dni')->unique();
             $table->float('chatRate');
-            $table->float('callrate');
+            $table->float('callRate');
             $table->float('videoRate');
             $table->integer('idGender')->unsigned();
             $table->integer('idUser')->unsigned();

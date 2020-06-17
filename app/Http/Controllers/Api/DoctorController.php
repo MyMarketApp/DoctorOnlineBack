@@ -28,7 +28,7 @@ class DoctorController extends Controller
 
             $priceCall = $stripe->prices->create([
                 'product' => $product->id,
-                'unit_amount' => $request->callrate*100,
+                'unit_amount' => $request->callRate*100,
                 'currency' => 'pen',
               ]);
 
@@ -44,7 +44,7 @@ class DoctorController extends Controller
             $doctor->lastName = $request->lastName;
             $doctor->dni = $request->dni;
             $doctor->chatRate = $request->chatRate;
-            $doctor->callrate = $request->callrate;
+            $doctor->callRate = $request->callRate;
             $doctor->videoRate = $request->videoRate;
             $doctor->idGender = $request->idGender;
             $doctor->idUser = $request->idUser;
