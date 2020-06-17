@@ -11,8 +11,9 @@ class Doctor extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'description', 'name', 'lastName', 'dni', 'rate', 'idGender', 'idUser', 'idSchedule', 
-        'idSpecialty', 'birthdate', 'imageUrl', 'idStripePrice'
+        'description', 'name', 'lastName', 'dni', 'chatRate', 'idGender', 'idUser', 'idSchedule', 
+        'idSpecialty', 'birthdate', 'imageUrl', 'idChatStripePrice', 'idCallStripePrice',
+        'idVideoStripePrice', 'callrate', 'videoRate'
     ];
 
     public function gender()

@@ -19,13 +19,17 @@ class CreateDoctorTable extends Migration
             $table->string('name')->nullable();
             $table->string('lastName')->nullable();
             $table->string('dni')->unique();
-            $table->float('rate');
+            $table->float('chatRate');
+            $table->float('callrate');
+            $table->float('videoRate');
             $table->integer('idGender')->unsigned();
             $table->integer('idUser')->unsigned();
             $table->integer('idSpecialty')->unsigned();
             $table->date('birthdate')->nullable();
             $table->string('imageUrl')->nullable();
-            $table->string('idStripePrice');
+            $table->string('idChatStripePrice');
+            $table->string('idCallStripePrice');
+            $table->string('idVideoStripePrice');
             $table->timestamps();
 
             $table->foreign('idUser')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
