@@ -20,9 +20,21 @@ class DoctorController extends Controller
                 'description' => 'Consulta',
               ]);
 
-            $price = $stripe->prices->create([
+            $priceChat = $stripe->prices->create([
                 'product' => $product->id,
-                'unit_amount' => $request->rate*100,
+                'unit_amount' => $request->chatRate*100,
+                'currency' => 'pen',
+              ]);
+
+            $priceCall = $stripe->prices->create([
+                'product' => $product->id,
+                'unit_amount' => $request->Callrate*100,
+                'currency' => 'pen',
+              ]);
+
+            $priceVideo = $stripe->prices->create([
+                'product' => $product->id,
+                'unit_amount' => $request->VideoRate*100,
                 'currency' => 'pen',
               ]);
 
@@ -37,7 +49,9 @@ class DoctorController extends Controller
             $doctor->idSpecialty = $request->idSpecialty;
             $doctor->birthdate = $request->birthdate;
             $doctor->imageUrl = $request->imageUrl;
-            $doctor->idStripePrice = $price->id;
+            $doctor->idChatStripePrice = $priceChat->id;
+            $doctor->idCallStripePrice = $priceCall->id;
+            $doctor->idVideoStripePrice = $priceVideo->id;
             $doctor->save();
             
             return response()->json(['status' => true, 
