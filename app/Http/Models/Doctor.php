@@ -36,4 +36,9 @@ class Doctor extends Model
         return $this->belongsToMany('App\Http\Models\Schedule', 'doctor_schedule', 'idDoctor', 'idSchedule');
     }
 
+    public function appointments()
+    {
+        return $this->hasMany('App\Http\Models\Appointment','idDoctor','id');
+    }
+
 }

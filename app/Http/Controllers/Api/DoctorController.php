@@ -124,7 +124,7 @@ class DoctorController extends Controller
     public function top(){
         try
         {
-            $doctors = Doctor::with(['specialty'])->take(3)->get();
+            $doctors = Doctor::with(['specialty','user', 'appointments'])->take(3)->get();
             
             return response()->json(['status' => true, 
                 'message'=> 'Doctors Found',
