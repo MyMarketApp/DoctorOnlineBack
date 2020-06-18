@@ -12,7 +12,7 @@ class Appointment extends Model
 
     protected $fillable = [
         'diagnostic', 'prescription', 'comment', 'score', 'date',
-        'idDoctor', 'idStatus', 'idPatient', 'idSchedule'
+        'idDoctor', 'idStatus', 'idPatient', 'idSchedule', 'idType'
     ];
 
     public function doctor()
@@ -23,6 +23,11 @@ class Appointment extends Model
     public function status()
     {
         return $this->belongsTo('App\Http\Models\AppointmentStatus','idStatus','id');
+    }
+
+    public function type()
+    {
+        return $this->belongsTo('App\Http\Models\AppointmentTypes','idType','id');
     }
 
     public function patient()

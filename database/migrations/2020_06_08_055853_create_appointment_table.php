@@ -24,6 +24,7 @@ class CreateAppointmentTable extends Migration
             $table->integer('idStatus')->unsigned();
             $table->integer('idPatient')->unsigned();
             $table->integer('idSchedule')->unsigned();
+            $table->integer('idType')->unsigned();
 
             $table->timestamps();
 
@@ -31,6 +32,7 @@ class CreateAppointmentTable extends Migration
             $table->foreign('idStatus')->references('id')->on('appointment_status')->onUpdate('NO ACTION')->onDelete('NO ACTION');
             $table->foreign('idPatient')->references('id')->on('patient')->onUpdate('NO ACTION')->onDelete('NO ACTION');
             $table->foreign('idSchedule')->references('id')->on('schedule')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+            $table->foreign('idType')->references('id')->on('appointment_types')->onUpdate('NO ACTION')->onDelete('NO ACTION');
         });
     }
 
