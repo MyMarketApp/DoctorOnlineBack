@@ -21,6 +21,11 @@ class Doctor extends Model
         return $this->belongsTo('App\Http\Models\UserGender','idGender','id');
     }
 
+    public function user()
+    {
+        return $this->belongsTo('App\Http\Models\User','idUser','id');
+    }
+
     public function specialty()
     {
         return $this->belongsTo('App\Http\Models\Specialty','idSpecialty','id');
