@@ -124,7 +124,7 @@ class DoctorController extends Controller
     public function top(){
         try
         {
-            $doctors = Doctor::with(['specialty','user', 'appointments'])->take(3)->get();
+            $doctors = Doctor::with(['specialty','user'])->take(3)->get();
             
             return response()->json(['status' => true, 
                 'message'=> 'Doctors Found',
@@ -148,6 +148,25 @@ class DoctorController extends Controller
             return response()->json(['status' => true, 
                 'message'=> 'Schedules Found',
                 'body'=> $doctor->schedules],
+                200);
+        }
+        catch(\Exception $e)
+        {
+            return response()->json(['status' => false,
+                'message'=> 'Hubo un error',
+                'body' => $e->getMessage()],
+                500);
+        }
+    }
+
+    public function appointments($id){
+        try
+        {
+            $doctor = Doctor::where('id',$id)->with(['appointments'])->first();
+
+            return response()->json(['status' => true, 
+                'message'=> 'Appointments Found',
+                'body'=> $doctor->appointments],
                 200);
         }
         catch(\Exception $e)

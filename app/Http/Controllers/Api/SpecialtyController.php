@@ -30,7 +30,7 @@ class SpecialtyController extends Controller
     public function doctors($id){
         try
         {
-            $specialty = Specialty::where('id',$id)->with(['doctors.user', 'doctors.appointments'])->first();
+            $specialty = Specialty::where('id',$id)->with(['doctors.user'])->first();
             
             return response()->json(['status' => true, 
                 'message'=> 'Doctors Found',
