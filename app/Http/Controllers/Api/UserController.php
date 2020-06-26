@@ -129,6 +129,27 @@ class UserController extends Controller
         }
     }
 
+    public function updateExpoPushToken(Request $request){
+        try
+        {
+            $user = User::where('email',$request->email)->first();
+            $user->expoPushToken = $request->expoPushToken;
+            $user->save();
+
+            return response()->json(['status' => true, 
+                'message'=> 'Update Success',
+                'body'=> $user],
+                200);
+        }
+        catch(\Exception $e)
+        {
+            return response()->json(['status' => false,
+                'message'=> 'Hubo un error',
+                'body' => $e->getMessage()],
+                500);
+        }
+    }
+
     public function find($id){
         try
         {

@@ -24,6 +24,7 @@ Route::prefix('User')->group(function(){
     Route::get('find/{id}', 'Api\UserController@find');
     Route::get('genders', 'Api\UserGenderController@all');
     Route::post('update', 'Api\UserController@update');
+    Route::post('updateExpoPushToken', 'Api\UserController@updateExpoPushToken');
     Route::post('login', 'Api\UserController@login');
     Route::get('{email}/verify', 'Api\UserController@verify');
     Route::get('{id}/profiles', 'Api\UserController@profiles');
