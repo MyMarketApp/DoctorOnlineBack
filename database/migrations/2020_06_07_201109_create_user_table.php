@@ -21,6 +21,7 @@ class CreateUserTable extends Migration
             $table->float('score')->nullable();
             $table->integer('idType')->unsigned()->nullable();
             $table->string('idStripeCustomer')->nullable();
+            $table->string('expoPushToken')->nullable();
             $table->timestamps();
 
             $table->foreign('idType')->references('id')->on('user_type')->onUpdate('cascade')->onDelete('cascade');

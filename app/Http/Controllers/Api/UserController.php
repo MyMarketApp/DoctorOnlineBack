@@ -18,6 +18,7 @@ class UserController extends Controller
             $user->phone = $request->phone;
             $user->score = $request->score;
             $user->idType = $request->idType;
+            $user->expoPushToken = $request->expoPushToken;
             if ($request->idType == 1)
             {
                 $stripe = new \Stripe\StripeClient(env('STRIPE_API_KEY'));
@@ -109,6 +110,7 @@ class UserController extends Controller
             $user->phone = $request->phone;
             $user->score = $request->score;
             $user->idType = $request->idType;
+            $user->expoPushToken = $request->expoPushToken;
             $user->save();
 
             return response()->json(['status' => true, 

@@ -11,7 +11,7 @@ class User extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'email', 'phone', 'score', 'idType', 'idStripeCustomer'
+        'email', 'phone', 'score', 'idType', 'idStripeCustomer', 'expoPushToken'
     ];
     protected $hidden = [
         'password',
