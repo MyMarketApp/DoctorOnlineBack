@@ -54,6 +54,9 @@ class DoctorController extends Controller
             $doctor->idChatStripePrice = $priceChat->id;
             $doctor->idCallStripePrice = $priceCall->id;
             $doctor->idVideoStripePrice = $priceVideo->id;
+            $doctor->cv = $priceChat->cv;
+            $doctor->rne = $priceCall->rne;
+            $doctor->cmp = $priceVideo->cmp;
             $doctor->save();
             
             return response()->json(['status' => true, 
@@ -84,6 +87,9 @@ class DoctorController extends Controller
             $doctor->idSpecialty = $request->idSpecialty;
             $doctor->birthdate = $request->birthdate;
             $doctor->imageUrl = $request->imageUrl;
+            $doctor->cv = $priceChat->cv;
+            $doctor->rne = $priceCall->rne;
+            $doctor->cmp = $priceVideo->cmp;
             $doctor->save();
 
             return response()->json(['status' => true, 

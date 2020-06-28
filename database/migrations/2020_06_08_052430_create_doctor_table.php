@@ -18,6 +18,9 @@ class CreateDoctorTable extends Migration
             $table->string('description')->nullable();
             $table->string('name')->nullable();
             $table->string('lastName')->nullable();
+            $table->string('cmp')->nullable();
+            $table->string('rne')->nullable();
+            $table->string('cv')->nullable();
             $table->string('dni')->unique();
             $table->float('chatRate');
             $table->float('callRate');

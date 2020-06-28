@@ -13,7 +13,7 @@ class Doctor extends Model
     protected $fillable = [
         'description', 'name', 'lastName', 'dni', 'chatRate', 'idGender', 'idUser', 'idSchedule', 
         'idSpecialty', 'birthdate', 'imageUrl', 'idChatStripePrice', 'idCallStripePrice',
-        'idVideoStripePrice', 'callRate', 'videoRate'
+        'idVideoStripePrice', 'callRate', 'videoRate', 'cv', 'rne', 'cmp'
     ];
 
     public function gender()
