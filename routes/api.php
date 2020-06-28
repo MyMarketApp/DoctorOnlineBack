@@ -43,7 +43,7 @@ Route::prefix('Doctor')->group(function(){
     Route::get('{id}/schedules', 'Api\DoctorController@schedules');
     Route::get('top', 'Api\DoctorController@top');
     Route::get('{id}/appointments', 'Api\DoctorController@appointments');
-    // Route::get('try', 'Api\DoctorController@try');
+    Route::post('try', 'Api\DoctorController@try');
 });
 
 Route::prefix('Specialty')->group(function(){

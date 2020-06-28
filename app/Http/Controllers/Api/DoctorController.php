@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Doctor;
 use Cartalyst\Stripe\Stripe;
+use MicrosoftAzure\Storage\Blob\Models\CreateContainerOptions;
+use MicrosoftAzure\Storage\Blob\Models\PublicAccessType; 
+use MicrosoftAzure\Storage\Common\ServiceException;
+use MicrosoftAzure\Storage\Common\ServicesBuilder;
 
 class DoctorController extends Controller
 {
@@ -54,11 +58,19 @@ class DoctorController extends Controller
             $doctor->idChatStripePrice = $priceChat->id;
             $doctor->idCallStripePrice = $priceCall->id;
             $doctor->idVideoStripePrice = $priceVideo->id;
-            $doctor->cv = $priceChat->cv;
-            $doctor->rne = $priceCall->rne;
-            $doctor->cmp = $priceVideo->cmp;
+            $doctor->rne = $request->rne;
+            $doctor->cmp = $request->cmp;
             $doctor->save();
             
+            $file = $request->file('cv');
+            if($file)
+            {
+                $Account = ServicesBuilder::getInstance()->createBlobService(env('AZURE_LARAVELES'));
+                $Account->createBlockBlob(env('AZURE_CONTAINER'),$doctor->id . "." . $file->getClientOriginalExtension(),fopen($file,'r'));
+                $doctor->cv = "https://" . env('AZURE_STORAGE_ACCOUNT') . ".blob.core.windows.net/" . env('AZURE_CONTAINER') . "/" . $doctor->id . "." . $file->getClientOriginalExtension();
+                $doctor->save();
+            }
+
             return response()->json(['status' => true, 
                 'message'=> 'Doctor Created',
                 'body'=> $doctor],
@@ -184,25 +196,26 @@ class DoctorController extends Controller
         }
     }
 
-    // public function try(){
-    //     try
-    //     {
-    //         $stripe = new \Stripe\StripeClient(env('STRIPE_API_KEY'));
-    //         $price = $stripe->prices->retrieve('price_1Gt4WWCIA0h2xnEvkJFONiWM', []);
-    //         return $price;
-            
-    //         $stripe = new Stripe(env('STRIPE_API_KEY'));
-    //         $product = $stripe->products()->find('prod_HRaYkuUV0CEhho');
-    //         return $product;
+    public function try(Request $request){
+        try
+        {
+            $file = $request->file('cv');
+            if($file)
+            {
+            $Account = ServicesBuilder::getInstance()->createBlobService(env('AZURE_LARAVELES'));
+            $Account->createBlockBlob('cvs',$file->getClientOriginalName(),fopen($file,'r'));
+            return "https://" . env('AZURE_STORAGE_ACCOUNT') . ".blob.core.windows.net/" . env('AZURE_CONTAINER') . "/" . $file->getClientOriginalName();
+            }
+            return "buah";
 
-    //     }
-    //     catch(\Exception $e)
-    //     {
-    //         return response()->json(['status' => false,
-    //             'message'=> 'Hubo un error',
-    //             'body' => $e->getMessage()],
-    //             500);
-    //     }
-    // }
+        }
+        catch(\Exception $e)
+        {
+            return response()->json(['status' => false,
+                'message'=> 'Hubo un error',
+                'body' => $e->getMessage()],
+                500);
+        }
+    }
 
 }
