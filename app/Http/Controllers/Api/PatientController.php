@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Patient;
+use MicrosoftAzure\Storage\Blob\Models\CreateContainerOptions;
+use MicrosoftAzure\Storage\Blob\Models\PublicAccessType; 
+use MicrosoftAzure\Storage\Common\ServiceException;
+use MicrosoftAzure\Storage\Common\ServicesBuilder;
 
 class PatientController extends Controller
 {
@@ -46,6 +50,13 @@ class PatientController extends Controller
             $patient->dni = $request->dni;
             $patient->birthdate = $request->birthdate;
             $patient->imageUrl = $request->imageUrl;
+            $file = $request->file('photo');
+            if($file)
+            {
+                $Account = ServicesBuilder::getInstance()->createBlobService(env('AZURE_LARAVELES'));
+                $Account->createBlockBlob(env('AZURE_CONTAINER_PROFILE'),$patient->id . "." . $file->getClientOriginalExtension(),fopen($file,'r'));
+                $patient->imageUrl = "https://" . env('AZURE_STORAGE_ACCOUNT') . ".blob.core.windows.net/" . env('AZURE_CONTAINER_PROFILE') . "/" . $patient->id . "." . $file->getClientOriginalExtension();
+            }
             $patient->save();
 
             return response()->json(['status' => true, 

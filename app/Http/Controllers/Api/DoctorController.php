@@ -66,8 +66,8 @@ class DoctorController extends Controller
             if($file)
             {
                 $Account = ServicesBuilder::getInstance()->createBlobService(env('AZURE_LARAVELES'));
-                $Account->createBlockBlob(env('AZURE_CONTAINER'),$doctor->id . "." . $file->getClientOriginalExtension(),fopen($file,'r'));
-                $doctor->cv = "https://" . env('AZURE_STORAGE_ACCOUNT') . ".blob.core.windows.net/" . env('AZURE_CONTAINER') . "/" . $doctor->id . "." . $file->getClientOriginalExtension();
+                $Account->createBlockBlob(env('AZURE_CONTAINER_CV'),$doctor->id . "." . $file->getClientOriginalExtension(),fopen($file,'r'));
+                $doctor->cv = "https://" . env('AZURE_STORAGE_ACCOUNT') . ".blob.core.windows.net/" . env('AZURE_CONTAINER_CV') . "/" . $doctor->id . "." . $file->getClientOriginalExtension();
                 $doctor->save();
             }
 
@@ -202,9 +202,9 @@ class DoctorController extends Controller
             $file = $request->file('cv');
             if($file)
             {
-            $Account = ServicesBuilder::getInstance()->createBlobService(env('AZURE_LARAVELES'));
-            $Account->createBlockBlob('cvs',$file->getClientOriginalName(),fopen($file,'r'));
-            return "https://" . env('AZURE_STORAGE_ACCOUNT') . ".blob.core.windows.net/" . env('AZURE_CONTAINER') . "/" . $file->getClientOriginalName();
+                $Account = ServicesBuilder::getInstance()->createBlobService(env('AZURE_LARAVELES'));
+                $Account->createBlockBlob('cvs',$file->getClientOriginalName(),fopen($file,'r'));
+                return "https://" . env('AZURE_STORAGE_ACCOUNT') . ".blob.core.windows.net/" . env('AZURE_CONTAINER_CV') . "/" . $file->getClientOriginalName();
             }
             return "buah";
 
